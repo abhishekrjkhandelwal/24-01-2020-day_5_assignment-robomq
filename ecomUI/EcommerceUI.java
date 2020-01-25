@@ -21,7 +21,7 @@ public class EcommerceUI {
 		service=new CustomerServiceImpl();
 	}
 	
-	//Register New Cuustomer
+	//Register New Customer
 	public void registerCustomer()
 	{
 		System.out.println("Enter Customer id.");
@@ -56,6 +56,7 @@ public class EcommerceUI {
 	    	{
 	    		System.out.println("Login Succussfuly" + "Welcome" + c.getName());
 	    		
+	            
 	    		System.out.println("Do you want to update and delete Customer Choose option" + "1.Delete 2. Update");
 	    		int ch = sc.nextInt();
 	    		if(ch ==1)
@@ -71,13 +72,52 @@ public class EcommerceUI {
 	    		else if(ch == 2)
 	    		{
 	    			c.getId();
-	    			System.out.println("Enter new Customer Email");
-	    			c.setEmail(sc.next());
-	    			System.out.println("Enter new Customer Address");
-	    			c.setAddress(sc.next());
-	    			System.out.println("Enter new Custmer Mobile no");
-	    			c.setMobileno(sc.next());
+	    			int flag = 0;
+		    		
+		    		System.out.println("do you want to update Email? (y/n)");
+		    		Scanner sc = new Scanner(System.in);
+		    		String choice = sc.next();
+		    		
+		    		if(choice.equals("y"))
+		    		{
+		    			System.out.println("Enter new Customer Email");
+		    			c.setEmail(sc.next());
+		    		}
+		    		
+		    		else 
+		    		{
+		    			System.out.println("Customer Email Not Updated");
+		    		}
+		    		
+	    			System.out.println("do you want to update Address? (y/n)");
 	    			
+	    			String choice1 = sc.next();
+	    			
+	    			if(choice1.equals("y"))
+	    			{
+		    			System.out.println("Enter new Customer Address");
+		    			c.setAddress(sc.next());
+		    		}
+	    			
+	    			else
+	    			{
+	    				System.out.println("Customer Address Not Updated");
+	    			}
+	    		
+	    			String choice2 = sc.next();
+		    		
+	    			if(choice2.equals("y"))
+	    			{
+		    			System.out.println("Enter new Custmer Mobile no");
+		    			c.setMobileno(sc.next());
+	    			}
+	    			else
+	    			{
+	    				System.out.println("Customer Mobile_No Not Updated");
+	    			}
+	    		
+
+	    			System.out.println("do you want to update Mobile Number? (y/n)");
 	    			if(service.updateCustomer(c) == true)
 	    			{
 	    				System.out.println("Customer Details are updated");
@@ -86,6 +126,7 @@ public class EcommerceUI {
 	    			{
 	    				System.out.println("Customer Details are not updated");
 	    			}
+	    		  
 	    		}
 	    	}
 	    }
@@ -108,7 +149,7 @@ public class EcommerceUI {
 				System.out.println("Customer Name: " + res.getString(2));
 				System.out.println("Customer Email: " + res.getString(3));
 				System.out.println("Customer Address: " + res.getString(4));
-				System.out.println("Customer Mobile No" + res.getString(5));
+				System.out.println("Customer Mobile No: " + res.getString(5));
 			}
 		}catch(Exception e)
 		{
@@ -125,7 +166,8 @@ public class EcommerceUI {
 			System.out.println("Enter Your Choice");
 			System.out.println("1. Registring New Customer");
 			System.out.println("2. Login as Existing Customer");
-			System.out.println("3. Exit");
+			System.out.println("3. View Customer");
+			System.out.println("4. Exit");
 			ch=sc.next();
 			switch(ch)
 			{
@@ -138,10 +180,18 @@ public class EcommerceUI {
 				case "2":
 				{
 					e.loginCustomer();
+					break;
 				}
+				
 				case "3":
 				{
+					e.viewCustomer();
+					break;
+				}
+				case "4":
+				{
 					System.exit(0);
+					break;
 				}
 			}
 	}
